@@ -31,8 +31,6 @@ proyecto-iac/
 │ └── instanceEnvironments.yaml # Template con configuraciones por ambiente
 │
 ├── serverless/
-│ ├── src/
-│ │ └── main.ts # Código fuente de las funciones Lambda
 │ └── serverless.yaml # Configuración del framework Serverless
 │
 └── README.md
