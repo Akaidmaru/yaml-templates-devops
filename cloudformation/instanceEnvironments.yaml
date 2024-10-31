@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Instance that changes once selected the Environment Type
+
+Parameters:
+  EnvironmentType:
+    Description: Environment types(Production, Testing or Development)
+    Type: String
+    Default: Production
+    AllowedValues:
+      - Production
+      - Testing
+      - Development
+
+Mappings:
+  Environment:
+    Production:
+      InstanceType: t2.micro
+      ImageId: ami-0866a3c8686eaeeba
+    Testing:
+      InstanceType: t2.micro
+      ImageId: ami-0866a3c8686eaeeba
+    Development:
+      InstanceType: t1.micro
+      ImageId: ami-0324a83b82023f0b3
+
+Resources:
+  OneInstanceToRuleThemAll:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      DisableApiTermination: false
+      ImageId: !FindInMap [Environment, !Ref EnvironmentType, ImageId]
+      InstanceType: !FindInMap [Environment, !Ref EnvironmentType, InstanceType]
+      InstanceInitiatedShutdownBehavior: terminate
+      KeyName: EC2KeyPair
+      Monitoring: false

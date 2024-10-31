@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  tasks:
+  - name: EC2 Instance creation with Ansible
+    amazon.aws.ec2_instance:
+      name: "AnsibleInstance"
+      key_name: EC2KeyPair
+      instance_type: t2.micro
+      image_id: ami-0866a3c8686eaeeba
+      tags:
+        Environment: PROD
+

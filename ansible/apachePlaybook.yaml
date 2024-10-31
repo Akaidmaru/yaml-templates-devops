@@ -1,0 +1,17 @@
+---
+- name: Apache Install
+  hosts: apache_server_playbook
+  become: yes
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+    - name: Apache Install
+      apt:
+        name: apache2
+        state: present
+    - name: Start Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes

@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creation of a S3 bucket and 2 instances of EC2
+Resources:
+  MyPrivateBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-private-bucket
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      VersioningConfiguration:
+        Status: Enabled
+  MyFirstEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      DisableApiTermination: false
+      ImageId: ami-0866a3c8686eaeeba
+      InstanceType: t2.micro
+      InstanceInitiatedShutdownBehavior: terminate
+      KeyName: EC2KeyPair
+      Monitoring: false
+  MySecondEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: us-east-1a
+      DisableApiTermination: false
+      ImageId: ami-0866a3c8686eaeeba
+      InstanceType: t2.micro
+      InstanceInitiatedShutdownBehavior: terminate
+      KeyName: EC2KeyPair
+      Monitoring: false

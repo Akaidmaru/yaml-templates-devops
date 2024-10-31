@@ -1,0 +1,124 @@
+service: swapi
+
+custom:
+    serverless-offline:
+        httpPort: 3003
+        lambdaPort: 3005
+    tableName: ${self:service}-${opt:stage, self:provider.stage}
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs20.x
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+      Resource: 
+        Fn::Join:
+          - ''
+          - - "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/"
+            - ${self:custom.tableName}
+functions:
+  getPeopleSwapi:
+    handler: dist/main.getPeopleSwapi
+    events:
+      - http:
+          method: GET
+          path: /swapi/people
+          private: false
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+  createVehicle:
+    handler: dist/main.createVehicle
+    environment:
+      VEHICLES_TABLE_NAME: ${self:custom.tableName}
+    events:
+      - http:
+          method: POST
+          path: /vehicles
+          private: false
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+  getVehicles:
+    handler: dist/main.getVehicles
+    environment:
+      VEHICLES_TABLE_NAME: ${self:custom.tableName}
+    events:
+      - http:
+          method: GET
+          path: /vehicles
+          private: false
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+  getVehicleById:
+    handler: dist/main.getVehicleById
+    environment:
+      VEHICLES_TABLE_NAME: ${self:custom.tableName}
+    events:
+      - http:
+          method: GET
+          path: /vehicles/{id}
+          private: false
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+            allowCredentials: false
+
+resources:
+  Resources:
+    VehiclesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PROVISIONED
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
+
+plugins:
+  - serverless-offline
