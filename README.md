@@ -40,7 +40,7 @@ proyecto-iac/
 
 ### CloudFormation
 
-- Creación de bucket S3 y instancias EC2
+- Creación de bucket S3 e instancias EC2
 - Instancias EC2 con configuraciones basadas en ambiente (Dev/Test/Prod)
 
 ### Ansible
