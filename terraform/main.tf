@@ -171,6 +171,12 @@ resource "aws_instance" "terraform-ec2-1" {
   vpc_security_group_ids = [aws_security_group.sala5-sg.id]
   associate_public_ip_address = true
   key_name = var.key_pair_name
+
+  depends_on = [
+    aws_subnet.public-subnet-1,
+    aws_security_group.sala5-sg,
+    aws_route_table_association.public-rtb-assoc
+  ]
   tags = {
     Name = "Public EC2 Instance 1"
   }
