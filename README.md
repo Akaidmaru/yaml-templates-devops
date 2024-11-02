@@ -18,6 +18,7 @@ El propósito de este proyecto es proporcionar ejemplos prácticos de implementa
   - IAM (Identity and Access Management)
 
 ## 📁 Estructura del Proyecto
+
 ```
 proyecto-iac/
 │
@@ -33,54 +34,16 @@ proyecto-iac/
 ├── serverless/
 │ └── serverless.yaml # Configuración del framework Serverless
 │
+├── terraform/
+│ ├── vpc.tf # Configuración de VPC
+│ ├── compute.tf # Configuración de instancias EC2
+│ ├── routing.tf # Configuración de tablas de enrutamiento
+│ ├── subnets.tf # Configuración de subredes
+│ ├── provider.tf # Configuración del proveedor
+│ ├── variables.tf # Variables del proyecto
+│ └── security-group.tf # Configuración de grupos de seguridad
+│
 └── README.md
-```
-
-## 🚀 Ejemplos Incluidos
-
-### CloudFormation
-
-- Creación de bucket S3 e instancias EC2
-- Instancias EC2 con configuraciones basadas en ambiente (Dev/Test/Prod)
-
-### Ansible
-
-- Instalación y configuración de Apache
-- Creación automatizada de instancias EC2
-
-### Serverless
-
-- API REST con integración a DynamoDB
-- Endpoints para gestión de vehículos
-- Integración con SWAPI (Star Wars API)
-
-## 📝 Prerrequisitos
-
-- Cuenta AWS con credenciales configuradas
-- AWS CLI instalado y configurado
-- Node.js y npm (para Serverless Framework)
-- Ansible instalado
-- Python 3.x
-
-## 🔧 Configuración
-
-1. Clonar el repositorio
-
-```bash
-git clone https://github.com/tu-usuario/proyecto-iac.git
-```
-
-2. Configurar credenciales AWS:
-
-```bash
-aws configure
-```
-
-3. Instalar dependencias del proyecto Serverless:
-
-```bash
-cd serverless
-npm install
 ```
 
 ## 📚 Documentación Adicional
@@ -88,7 +51,15 @@ npm install
 - [AWS CloudFormation](https://aws.amazon.com/cloudformation/)
 - [Ansible Documentation](https://docs.ansible.com/)
 - [Serverless Framework](https://www.serverless.com/framework/docs/)
+- [Terraform Documentation](https://www.terraform.io/docs/index.html)
 
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Por favor, abre un issue para discutir los cambios propuestos.
+
+## 📄 Documentación de Subproyectos
+
+- [Ansible](ansible/README.md)
+- [CloudFormation](cloudformation/README.md)
+- [Serverless](serverless/README.md)
+- [Terraform](terraform/README.md)
