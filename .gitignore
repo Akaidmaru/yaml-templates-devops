@@ -3,6 +3,7 @@ imgs/
 KeyPairs/
 keypairs/
 extraTemplates/
+test/
 
 ### VisualStudioCode ###
 .vscode/*
